@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SmartAppTest — Simple</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">SAT</div>
+      <div>
+        <div class="title">SmartAppTest</div>
+        <div class="subtitle">Simple test generator (Mock Mode)</div>
+      </div>
+    </div>
+
+    <div class="right">
+      <span class="pill" id="modePill">Mock Mode</span>
+      <button class="btn ghost" id="toggleModeBtn" type="button">Mock / Real API</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card">
+      <h1 class="h1">Create Mobile Tests in 3 Steps</h1>
+      <p class="muted">
+        Fill the form → generate tests → approve and run → view results.
+      </p>
+
+      <div class="stepper">
+        <div class="step-chip active" id="chip1">1) Request</div>
+        <div class="step-chip" id="chip2">2) Generate</div>
+        <div class="step-chip" id="chip3">3) Run</div>
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="panel" id="step1">
+        <h2 class="h2">Step 1 — Describe what to test</h2>
+
+        <div class="grid2">
+          <div>
+            <label class="label">App name</label>
+            <input class="input" id="appName" placeholder="e.g., DemoApp" />
+          </div>
+
+          <div>
+            <label class="label">Platform</label>
+            <select class="input" id="platform">
+              <option value="android">Android (Espresso)</option>
+              <option value="cross">Cross-platform (Appium)</option>
+            </select>
+          </div>
+        </div>
+
+        <label class="label">Feature to test</label>
+        <input class="input" id="feature" placeholder="e.g., Login, Search, Checkout" />
+
+        <label class="label">Requirements (what should happen?)</label>
+        <textarea class="input" id="requirements" rows="6"
+          placeholder="Example:
+As a user, I want to log in with email and password so that I can access my account.
+Test valid login, invalid password, empty fields, logout."></textarea>
+
+        <div class="row end">
+          <button class="btn" id="createBtn" type="button">Create Request</button>
+        </div>
+
+        <div class="note" id="requestNote"></div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="panel hidden" id="step2">
+        <h2 class="h2">Step 2 — Generate tests</h2>
+        <p class="muted">
+          This will automatically: collect context → generate tests → validate them.
+        </p>
+
+        <div class="statusbox">
+          <div class="statusrow"><span class="dot" id="dotGen"></span><b>Status:</b> <span id="genStatus">Waiting</span></div>
+          <div class="muted small" id="genDetails">Create a request first.</div>
+        </div>
+
+        <div class="row end">
+          <button class="btn" id="generateBtn" type="button" disabled>Generate Tests</button>
+        </div>
+
+        <div class="divider"></div>
+
+        <h3 class="h3">Preview (generated tests)</h3>
+        <pre class="code" id="preview">Nothing generated yet.</pre>
+
+        <div class="row end">
+          <button class="btn ghost" id="backTo1" type="button">Back</button>
+          <button class="btn" id="goTo3" type="button" disabled>Continue</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="panel hidden" id="step3">
+        <h2 class="h2">Step 3 — Approve and run</h2>
+        <p class="muted">
+          Approve runs the tests and creates a report. Reject stops the process.
+        </p>
+
+        <div class="row gap">
+          <button class="btn success" id="approveBtn" type="button" disabled>Approve & Run</button>
+          <button class="btn danger" id="rejectBtn" type="button" disabled>Reject</button>
+        </div>
+
+        <div class="divider"></div>
+
+        <h3 class="h3">Result</h3>
+        <div class="statusbox">
+          <div class="statusrow"><span class="dot" id="dotRun"></span><b>Status:</b> <span id="runStatus">Waiting</span></div>
+          <div class="muted small" id="runDetails">Generate tests first.</div>
+        </div>
+
+        <h3 class="h3">Execution output</h3>
+        <pre class="log" id="output">No output yet.</pre>
+
+        <div class="row end">
+          <button class="btn ghost" id="backTo2" type="button">Back</button>
+          <button class="btn" id="newRequestBtn" type="button">New Request</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span class="muted small">Tip: Stay in Mock Mode unless you have a backend running.</span>
+  </footer>
+
+  <script src="./app.js"></script>
+</body>
+</html>
